@@ -3,6 +3,7 @@ import Header from './components/Header';
 import List from './components/List';
 import { Todo } from './interface/Todo';
 import { nanoid } from 'nanoid';
+import Footer from './components/Footer';
 
 export default function App(): React.ReactElement {
   const [todoList, setTodoList] = useState<Todo[]>([]);
@@ -62,8 +63,7 @@ export default function App(): React.ReactElement {
     setTotalNum(totalNum - 1);
   };
 
-  const handleDoneAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const done = event.target.checked;
+  const doneAll = (done: boolean) => {
     if (totalNum !== 0) {
       const newTodoList = [...todoList];
       newTodoList.forEach((todo) => {
@@ -87,12 +87,7 @@ export default function App(): React.ReactElement {
         changeTodoOnMouse={changeTodoOnMouse}
         delTodo={delTodo}
       />
-      <input
-        type="checkbox"
-        onChange={handleDoneAll}
-        checked={totalNum === doneNum && totalNum !== 0 ? true : false}
-      ></input>
-      共{totalNum}, 已完成:{doneNum}
+      <Footer totalNum={totalNum} doneNum={doneNum} doneAll={doneAll}></Footer>
     </Fragment>
   );
 }
