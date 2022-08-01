@@ -160,7 +160,7 @@ export default function TodoList(): React.ReactElement {
                   style={{ display: item.onMouse ? '' : 'none' }}
                   onClick={() => handleSortTodo(item.id)}
                 >
-                  排到最前
+                  排到最前面
                 </button>
               </div>
             </li>
