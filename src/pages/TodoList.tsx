@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from "react";
-import Header from "../components/Header";
-import List from "../components/List";
-import { Todo } from "../interface/Todo";
-import { nanoid } from "nanoid";
-import Footer from "../components/Footer";
+import React, { Fragment, useState } from 'react';
+import Header from '../components/Header';
+import List from '../components/List';
+import { Todo } from '../interface/Todo';
+import { nanoid } from 'nanoid';
+import Footer from '../components/Footer';
 
-export default function TodoList(): React.ReactElement {
+const TodoList = (): JSX.Element => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [totalNum, setTotalNum] = useState(0);
   const [doneNum, setDoneNum] = useState(0);
@@ -90,4 +90,6 @@ export default function TodoList(): React.ReactElement {
       <Footer totalNum={totalNum} doneNum={doneNum} doneAll={doneAll}></Footer>
     </Fragment>
   );
-}
+};
+
+export default TodoList;

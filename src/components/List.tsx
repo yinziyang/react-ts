@@ -9,20 +9,22 @@ interface ListProps {
   delTodo: (id: string) => void;
 }
 
-export default function List(props: ListProps): React.ReactElement {
+const List = ({ todoList, changeTodoOnMouse, changeTodoDone, delTodo }: ListProps): JSX.Element => {
   return (
     <ul>
-      {props.todoList.map((todo) => {
+      {todoList.map((todo) => {
         return (
           <Item
             key={todo.id}
             todo={todo}
-            changeTodoDone={props.changeTodoDone}
-            changeTodoOnMouse={props.changeTodoOnMouse}
-            delTodo={props.delTodo}
+            changeTodoDone={changeTodoDone}
+            changeTodoOnMouse={changeTodoOnMouse}
+            delTodo={delTodo}
           ></Item>
         );
       })}
     </ul>
   );
-}
+};
+
+export default List;

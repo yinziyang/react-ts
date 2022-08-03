@@ -4,21 +4,19 @@ interface HeaderProps {
   addTodo: (text: string) => void;
 }
 
-export default function Header(props: HeaderProps): React.ReactElement {
+const Header = ({ addTodo }: HeaderProps): JSX.Element => {
   const [text, setText] = useState<string>('');
 
   const handleAddTodo = () => {
     if (text.trim() !== '') {
-      props.addTodo(text.trim());
+      addTodo(text.trim());
       setText('');
     } else {
       setText('');
     }
   };
 
-  const handleKeyPressSaveText = (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
+  const handleKeyPressSaveText = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleAddTodo();
     }
@@ -41,4 +39,6 @@ export default function Header(props: HeaderProps): React.ReactElement {
       <button onClick={handleAddTodo}>确认</button>
     </Fragment>
   );
-}
+};
+
+export default Header;

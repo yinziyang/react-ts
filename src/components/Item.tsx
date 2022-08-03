@@ -8,19 +8,19 @@ interface ItemProps {
   delTodo: (id: string) => void;
 }
 
-export default function Item(props: ItemProps): React.ReactElement {
-  const { id, text, done, onMouse } = props.todo;
+const Item = ({ todo, changeTodoDone, changeTodoOnMouse, delTodo }: ItemProps): JSX.Element => {
+  const { id, onMouse, done, text } = todo;
 
   const handleChangeTodoDone = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.changeTodoDone(id, event.target.checked);
+    changeTodoDone(id, event.target.checked);
   };
 
   const handleChangeTodoOnMouse = (onMouse: boolean) => {
-    props.changeTodoOnMouse(id, onMouse);
+    changeTodoOnMouse(id, onMouse);
   };
 
   const handleDelTodo = () => {
-    props.delTodo(id);
+    delTodo(id);
   };
 
   return (
@@ -29,20 +29,15 @@ export default function Item(props: ItemProps): React.ReactElement {
       onMouseOut={() => handleChangeTodoOnMouse(false)}
       style={{ background: onMouse ? 'gray' : '' }}
     >
-      <input
-        type="checkbox"
-        checked={done ? true : false}
-        onChange={(event) => handleChangeTodoDone(event)}
-      ></input>
+      <input type="checkbox" checked={done ? true : false} onChange={(event) => handleChangeTodoDone(event)}></input>
       &nbsp;&nbsp;&nbsp;&nbsp;
       {text}
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <button
-        onClick={handleDelTodo}
-        style={{ display: onMouse ? '' : 'none' }}
-      >
+      <button onClick={handleDelTodo} style={{ display: onMouse ? '' : 'none' }}>
         删除
       </button>
     </li>
   );
-}
+};
+
+export default Item;
