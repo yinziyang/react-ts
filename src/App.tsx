@@ -1,9 +1,12 @@
 import React, { Fragment } from "react";
+import TodoList from "./pages/TodoList";
 
-export default function App(): React.ReactElement {
+const App = (): JSX.Element => {
   return (
     <Fragment>
-      <div>hello</div>
+      <TodoList></TodoList>
     </Fragment>
   );
-}
+};
+
+export default App;
