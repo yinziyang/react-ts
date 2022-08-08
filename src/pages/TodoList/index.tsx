@@ -1,5 +1,6 @@
 import { Button, Input, List } from "antd";
 import React, { Fragment } from "react";
+import store from '../../store'
 
 interface MyProps {
   propName?: string;
@@ -9,15 +10,11 @@ interface MyState {
   stateName?: string;
 }
 
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires.",
-];
-
 export default class TodoList extends React.Component<MyProps, MyState> {
+  constructor(props: MyProps){
+    super(props)
+  }
+    
   render() {
     return (
       <Fragment>
@@ -27,7 +24,7 @@ export default class TodoList extends React.Component<MyProps, MyState> {
           <List
             style={{ marginTop: "10px", width: "300px" }}
             bordered
-            dataSource={data}
+            dataSource={store.getState().todoList}
             renderItem={(item) => <List.Item>{item}</List.Item>}
           />
         </div>

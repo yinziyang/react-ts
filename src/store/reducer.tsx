@@ -1,12 +1,14 @@
-import { Reducer } from "redux";
+import { Reducer, AnyAction } from "redux";
 
-interface TodoAction {
-  type: string;
-  payload: { value: string };
+interface TodoListState {
+  inputValue: string
+  todoList: string[];
+}
+const initialState: TodoListState = {
+  inputValue: '',
+  todoList: ["1", "2", "3"]
 }
 
-const reducer: Reducer<string, TodoAction> = (state: string, action: TodoAction): string => {
-  return state;
-};
-
-export default reducer;
+export default function TodoReducer(state=initialState, action: AnyAction):TodoListState{
+  return state
+}
