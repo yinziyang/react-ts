@@ -14,7 +14,7 @@ export interface TodoListState {
   todoList: Todo[];
 }
 
-interface Todo {
+export interface Todo {
   id: string;
   checked: boolean;
   onMouse: boolean;

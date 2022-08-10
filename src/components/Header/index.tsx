@@ -1,37 +1,16 @@
 import { Input, Button } from 'antd';
 import React, { Fragment } from 'react';
-import { createAddAction, createChangeInputTextAction } from '../../store/actions';
-import { TodoListState } from '../../store/reducers';
-import { store } from '../../store/store';
 
 interface MyProps {
-  propName?: string;
+  inputText: string;
+  handleChangeInputText: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAddTodo: () => void;
 }
 
-export default class Header extends React.Component<MyProps, TodoListState> {
-  constructor(props: MyProps) {
-    super(props);
-    this.state = store.getState();
-    store.subscribe(this.handleSaveState);
-  }
-
-  handleSaveState = () => {
-    this.setState(store.getState());
-  };
-
-  handleChangeInputText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const action = createChangeInputTextAction(event.target.value);
-    store.dispatch(action);
-  };
-
-  handleAddTodo = () => {
-    const action = createAddAction(this.state.inputText!);
-    store.dispatch(action);
-  };
-
+export default class Header extends React.Component<MyProps> {
   handleEnterInput = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      this.handleAddTodo();
+      this.props.handleAddTodo();
     }
   };
 
@@ -41,13 +20,13 @@ export default class Header extends React.Component<MyProps, TodoListState> {
         <Input
           style={{ width: '300px' }}
           placeholder="Enter todo text"
-          value={this.state.inputText}
+          value={this.props.inputText}
           onChange={(event) => {
-            this.handleChangeInputText(event);
+            this.props.handleChangeInputText(event);
           }}
           onKeyUp={this.handleEnterInput}
         ></Input>
-        <Button style={{ marginLeft: '10px' }} type="primary" onClick={this.handleAddTodo}>
+        <Button style={{ marginLeft: '10px' }} type="primary" onClick={this.props.handleAddTodo}>
           提交
         </Button>
       </Fragment>
