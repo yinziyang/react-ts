@@ -1,34 +1,35 @@
-import { Button, Input, List } from "antd";
-import React, { Fragment } from "react";
-import store from '../../store'
+import React, { Fragment } from 'react';
+import Header from '../../components/Header';
+import Items from '../../components/Items';
+import { store } from '../../store/store';
+import { TodoListState } from '../../store/reducers';
 
 interface MyProps {
   propName?: string;
 }
 
-interface MyState {
-  stateName?: string;
-}
-
-export default class TodoList extends React.Component<MyProps, MyState> {
-  constructor(props: MyProps){
-    super(props)
+export default class TodoList extends React.Component<MyProps, TodoListState> {
+  // state: MyState = { stateName: 'stateName' };
+  constructor(props: MyProps) {
+    super(props);
+    this.state = store.getState();
+    store.subscribe(this.handleSaveState);
   }
-    
+
+  handleSaveState = () => {
+    this.setState(store.getState());
+  };
+
   render() {
     return (
-      <Fragment>
-        <div style={{ marginTop: "10px", marginLeft: "10px" }}>
-          <Input placeholder="Enter todo" style={{ width: "300px", marginRight: "10px" }}></Input>
-          <Button type="primary">添加</Button>
-          <List
-            style={{ marginTop: "10px", width: "300px" }}
-            bordered
-            dataSource={store.getState().todoList}
-            renderItem={(item) => <List.Item>{item}</List.Item>}
-          />
+      <div>
+        <div style={{ marginTop: '10px', marginLeft: '10px' }}>
+          <Header></Header>
         </div>
-      </Fragment>
+        <div style={{ marginTop: '10px', marginLeft: '10px' }}>
+          <Items></Items>
+        </div>
+      </div>
     );
   }
 }
