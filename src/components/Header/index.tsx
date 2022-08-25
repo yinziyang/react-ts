@@ -19,14 +19,18 @@ export default class Header extends React.Component<MyProps> {
       <Fragment>
         <Input
           style={{ width: '300px' }}
-          placeholder="Enter todo text"
+          placeholder='Enter todo text'
           value={this.props.inputText}
           onChange={(event) => {
             this.props.handleChangeInputText(event);
           }}
           onKeyUp={this.handleEnterInput}
         ></Input>
-        <Button style={{ marginLeft: '10px' }} type="primary" onClick={this.props.handleAddTodo}>
+        <Button
+          style={{ marginLeft: '10px' }}
+          type='primary'
+          onClick={this.props.handleAddTodo}
+        >
           提交
         </Button>
       </Fragment>

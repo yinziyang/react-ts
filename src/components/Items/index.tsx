@@ -10,7 +10,7 @@ interface MyProps {
 const Items = (props: MyProps): JSX.Element => {
   return (
     <List
-      size="large"
+      size='large'
       style={{ width: '300px' }}
       header={<div>Header</div>}
       footer={<div>Footer</div>}
@@ -23,11 +23,15 @@ const Items = (props: MyProps): JSX.Element => {
         >
           {item.text}
           <Button
-            type="primary"
+            type='primary'
             danger
-            size="small"
+            size='small'
             onClick={() => props.handleDelTodo(item.id)}
-            style={{ marginLeft: '10px', display: item.onMouse ? '' : 'none', float: 'right' }}
+            style={{
+              marginLeft: '10px',
+              display: item.onMouse ? '' : 'none',
+              float: 'right',
+            }}
           >
             删除
           </Button>
