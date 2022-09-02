@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
       dispatch(incrementIfOdd(Number(incrementValue)));
     },
     incrementAsync(incrementValue: number) {
-      dispatch(incrementAsync(incrementValue));
+      dispatch(incrementAsync(Number(incrementValue)));
     },
   };
 };
