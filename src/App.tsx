@@ -1,9 +1,18 @@
-import React, { Fragment } from "react";
+import { Component } from 'react';
+import Counter from './components/Counter';
 
-export default function App(): React.ReactElement {
-  return (
-    <Fragment>
-      <div>hello</div>
-    </Fragment>
-  );
+type Props = {};
+
+type State = {};
+
+export default class App extends Component<Props, State> {
+  state = {};
+
+  render() {
+    return (
+      <div>
+        <Counter></Counter>
+      </div>
+    );
+  }
 }
