@@ -43,7 +43,7 @@ interface State {
 }
 
 class Counter extends Component<Props, State> {
-  state = { incrementValue: 0 };
+  state = { incrementValue: 1 };
   render() {
     const counter = this.props.counter;
 
