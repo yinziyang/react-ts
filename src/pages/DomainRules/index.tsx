@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import {
   Button,
@@ -65,21 +65,36 @@ class DomainRules extends Component<Props, State> {
     this.props.asyncQuery();
   }
 
+  handleQuery = () => {
+    const { params } = this.props.state;
+    const pageParams: PageParams = {
+      limit: params.limit,
+      offset: 0,
+    };
+    this.props.changePage(pageParams);
+  };
+
   render() {
     const { data, params, loading } = this.props.state;
+
     return (
       <Row gutter={[0, 10]}>
         <Col span={12}>
-          <Space breakLine direction='horizontal'>
+          <Space breakLine direction="horizontal">
             <Input
               value={params.domain}
               onChange={(value) => {
                 this.props.changeDomain(String(value));
               }}
+              onKeyup={(_, context) => {
+                if (context.e.key === 'Enter') {
+                  this.handleQuery();
+                }
+              }}
             ></Input>
 
             <Select
-              placeholder='状态'
+              placeholder="状态"
               autoWidth
               clearable
               defaultValue={params.state}
@@ -87,13 +102,13 @@ class DomainRules extends Component<Props, State> {
                 this.props.changeState(String(value));
               }}
             >
-              <Option label='待审核' value='105'></Option>
-              <Option label='失效' value='1'></Option>
-              <Option label='生效' value='3'></Option>
+              <Option label="待审核" value="105"></Option>
+              <Option label="失效" value="1"></Option>
+              <Option label="生效" value="3"></Option>
             </Select>
 
             <Select
-              placeholder='不显示总数'
+              placeholder="不显示总数"
               autoWidth
               clearable
               defaultValue={params.displaycount}
@@ -101,19 +116,13 @@ class DomainRules extends Component<Props, State> {
                 this.props.changeDisplaycount(String(value));
               }}
             >
-              <Option label='显示总数' value='1'></Option>
+              <Option label="显示总数" value="1"></Option>
             </Select>
 
             <Button
-              theme='primary'
-              type='button'
-              onClick={() => {
-                const pageParams: PageParams = {
-                  limit: params.limit,
-                  offset: 0,
-                };
-                this.props.changePage(pageParams);
-              }}
+              theme="primary"
+              type="button"
+              onClick={this.handleQuery}
               loading={loading}
             >
               查询
@@ -123,7 +132,7 @@ class DomainRules extends Component<Props, State> {
 
         <Col span={12}>
           <Table
-            rowKey='id'
+            rowKey="id"
             data={data.rows}
             bordered
             loading={loading}
@@ -155,7 +164,6 @@ class DomainRules extends Component<Props, State> {
             }}
             pagination={{
               defaultCurrent: params.offset / params.limit + 1,
-              showJumper: true,
               defaultPageSize: params.limit,
               total: data.total,
               current: params.offset / params.limit + 1,

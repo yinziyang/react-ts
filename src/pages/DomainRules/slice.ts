@@ -15,7 +15,7 @@ const slice = createSlice({
   initialState: InitStoreState(),
   reducers: {
     changeDomain: (state: StoreState, action: PayloadAction<string>) => {
-      state.params.domain = action.payload;
+      state.params.domain = action.payload.trim();
     },
     changeState: (state: StoreState, action: PayloadAction<string>) => {
       action.payload === 'null'
